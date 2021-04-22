@@ -1,0 +1,27 @@
+[package]
+name = "stm32f446re"
+version = "0.1.0"
+authors = ["Christian Maniewski <code@chmanie.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+cortex-m = "0.6"
+cortex-m-rt = "0.6"
+# Panic behaviour, see https://crates.io/keywords/panic-impl for alternatives
+panic-halt = "0.2"
+# panic-rtt-target = { version = "0.1.0", features = ["cortex-m"] }
+# rtt-target = { version = "0.2.0", features = ["cortex-m"] }
+stm32f4xx-hal = { version = "0.6.0", features = ["stm32f446"] }
+
+[profile.release]
+codegen-units = 1 # better optimizations
+debug = true # symbols are nice and they don't increase the size on Flash
+lto = true # better optimizations
+
+[[bin]]
+name = "blinky"
+path = "src/main.rs"
+test = false
+bench = false
